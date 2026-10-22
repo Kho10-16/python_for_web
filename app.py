@@ -1,5 +1,5 @@
 # 导入flask
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, abort
 import os # 导入操作系统模块
 
 app = Flask(__name__)
@@ -130,6 +130,28 @@ def new_post():
             next_id += 1
             return redirect(url_for('blog'))
     return render_template('post_form.html', title='写新文章')
+
+def find_post(post_id):
+    for post in posts:
+        if post['id'] == post_id:
+            return post
+    return None
+
+@app.route('/blog/<int:post_id>/edit', methods=['GET', 'POST'])
+def edit_post(post_id):
+    post = find_post(post_id)
+    if post is None:
+        abort(404)
+
+    if request.method == 'POST':
+        post_title = request.form['title'].strip()
+        content = request.form['content'].strip()
+        if post_title and content:
+            post['title'] = post_title
+            post['content'] = content
+            return redirect(url_for('blog'))
+
+    return render_template('post_form.html', post=post, title='编辑文章')
 
 if __name__ == '__main__':
     # 部署时我们使用环境变量
