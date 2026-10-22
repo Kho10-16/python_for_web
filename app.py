@@ -112,6 +112,25 @@ def delete_task(index):
         tasks.pop(index)
     return redirect(url_for('task_list'))
 
+posts = []
+next_id = 1
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html', posts=posts, title='博客')
+
+@app.route('/blog/new', methods=['GET', 'POST'])
+def new_post():
+    global next_id
+    if request.method == 'POST':
+        post_title = request.form['title'].strip()
+        content = request.form['content'].strip()
+        if post_title and content:
+            posts.append({'id': next_id, 'title': post_title, 'content': content})
+            next_id += 1
+            return redirect(url_for('blog'))
+    return render_template('post_form.html', title='写新文章')
+
 if __name__ == '__main__':
     # 部署时我们使用环境变量
     # 使其同时适用于生产和开发环境

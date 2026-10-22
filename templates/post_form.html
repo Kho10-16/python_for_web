@@ -1,0 +1,16 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+  <h1>写新文章</h1>
+  <form method="POST">
+    <div>
+      <input type="text" name="title" placeholder="标题" required />
+    </div>
+    <div>
+      <textarea name="content" rows="8" placeholder="内容" required></textarea>
+    </div>
+    <div>
+      <button type="submit">发布</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
