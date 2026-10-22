@@ -153,6 +153,14 @@ def edit_post(post_id):
 
     return render_template('post_form.html', post=post, title='编辑文章')
 
+@app.route('/blog/<int:post_id>/delete', methods=['POST'])
+def delete_post(post_id):
+    post = find_post(post_id)
+    if post is None:
+        abort(404)
+    posts.remove(post)
+    return redirect(url_for('blog'))
+
 if __name__ == '__main__':
     # 部署时我们使用环境变量
     # 使其同时适用于生产和开发环境
