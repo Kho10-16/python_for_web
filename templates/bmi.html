@@ -1,0 +1,18 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+    <h1>BMI计算器</h1>
+    <form action="{{ url_for('bmi_result')}}" method="POST">
+        <div>
+            <input type="number" name="weight" placeholder="体重 (kg)"
+                    min="1" step="0.1" required>
+        </div>
+        <div>
+            <input type="number" name="height" placeholder="身高 (cm)"
+                    min="1" step="0.1" required>
+        </div>
+        <div>
+            <button type="submit">计算</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

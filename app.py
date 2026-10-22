@@ -61,6 +61,36 @@ def grade_result():
     message = f'{level}你的{subject}成绩是{score:g}'
     return render_template('grade_result.html', message=message, title='成绩结果')
 
+@app.route('/bmi')
+def bmi():
+    return render_template('bmi.html', title='BMI计算器')
+
+@app.route('/bmi/result', methods=['POST'])
+def bmi_result():
+    try:
+        weight = float(request.form['weight'])
+        height_cm = float(request.form['height'])
+    except ValueError:
+        return render_template('bmi_result.html', message='请输入有效的数字', title='错误')
+
+    if weight <= 0 or height_cm <= 0:
+        return render_template('bmi_result.html', message='体重和身高必须大于0', title='错误')
+
+    height_m = height_cm / 100
+    bmi_value = weight / (height_m ** 2)
+
+    if bmi_value < 18.5:
+        status = '体重过轻'
+    elif bmi_value < 25:
+        status = '健康体重'
+    elif bmi_value < 30:
+        status = '超重'
+    else:
+        status = '肥胖'
+
+    message = f'你的BMI里{bmi_value:.1f}, 属于:{status}'
+    return render_template('bmi_result.html', message=message, title='BMI结果')
+
 if __name__ == '__main__':
     # 部署时我们使用环境变量
     # 使其同时适用于生产和开发环境
