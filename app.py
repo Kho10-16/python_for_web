@@ -106,6 +106,12 @@ def add_task():
         tasks.append(task)
     return redirect(url_for('task_list'))
 
+@app.route('/tasks/delete/<int:index>', methods=['POST'])
+def delete_task(index):
+    if 0 <= index < len(tasks):
+        tasks.pop(index)
+    return redirect(url_for('task_list'))
+
 if __name__ == '__main__':
     # 部署时我们使用环境变量
     # 使其同时适用于生产和开发环境

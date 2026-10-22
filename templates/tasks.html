@@ -14,7 +14,13 @@
   {% if tasks %}
   <ul>
     {% for task in tasks %}
-    <li>{{ loop.index }}. {{ task }}</li>
+        <li>
+      {{ loop.index }}. {{ task }}
+      <form action="{{ url_for('delete_task', index=loop.index0) }}"
+            method="POST" class="inline-form">
+        <button type="submit">删除</button>
+      </form>
+    </li>
     {% endfor %}
   </ul>
   {% else %}
