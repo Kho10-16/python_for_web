@@ -1,0 +1,13 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+  <h1>表单数据</h1>
+  <ul>
+    <li>第一名字: {{result_data.first_name}}</li>
+    <li>姓氏: {{result_data.last_name}}</li>
+    <li>旧工作: {{result_data.old_job}}</li>
+    <li>当前工作: {{result_data.current_job}}</li>
+    <li>国家: {{result_data.country}}</li>
+  </ul>
+</div>
+
+{% endblock %}

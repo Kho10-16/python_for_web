@@ -1,0 +1,27 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+  <h1>{{name}}</h1>
+  <p>{{path}}</p>
+  <form action="/result" method="POST">
+    <div>
+      <input type="text" name="first_name" placeholder="第一名字" required />
+    </div>
+    <div>
+      <input type="text" name="last_name" placeholder="姓氏" required />
+    </div>
+    <div>
+      <input type="text" name="old_job" placeholder="旧工作" />
+    </div>
+    <div>
+      <input type="text" name="current_job" placeholder="当前工作" />
+    </div>
+    <div>
+      <input type="text" name="country" placeholder="国家" />
+    </div>
+    <div>
+      <button type="submit">提交</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
