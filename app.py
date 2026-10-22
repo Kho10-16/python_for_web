@@ -91,6 +91,21 @@ def bmi_result():
     message = f'你的BMI里{bmi_value:.1f}, 属于:{status}'
     return render_template('bmi_result.html', message=message, title='BMI结果')
 
+tasks = []
+
+tasks = []
+
+@app.route('/tasks')
+def task_list():
+    return render_template('tasks.html', tasks=tasks, title='任务管理器')
+
+@app.route('/tasks/add', methods=['POST'])
+def add_task():
+    task = request.form['task'].strip()
+    if task:
+        tasks.append(task)
+    return redirect(url_for('task_list'))
+
 if __name__ == '__main__':
     # 部署时我们使用环境变量
     # 使其同时适用于生产和开发环境

@@ -1,0 +1,24 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+  <h1>任务管理器</h1>
+
+  <form action="{{ url_for('add_task') }}" method="POST">
+    <div>
+      <input type="text" name="task" placeholder="输入新任务" required />
+    </div>
+    <div>
+      <button type="submit">添加</button>
+    </div>
+  </form>
+
+  {% if tasks %}
+  <ul>
+    {% for task in tasks %}
+    <li>{{ loop.index }}. {{ task }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>还没有任务</p>
+  {% endif %}
+</div>
+{% endblock %}
