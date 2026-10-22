@@ -1,0 +1,6 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+    <h1>{{ message }}</h1>
+    <a href="{{ url_for('grade') }}">再算一次</a>
+</div>
+{% endblock %}

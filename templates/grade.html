@@ -1,0 +1,17 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+    <h1>成绩计算器</h1>
+    <form action="{{url_for('grade_result')}}" method="POST">
+        <div>
+            <input type="text" name="subject" placeholder="科目名称" required>
+        </div>
+        <div>
+            <input type="number" name="score" placeholder="分数 (0-100)"
+                    min="0" max="100" step="0.1" required>
+        </div>
+        <div>
+            <button type="submit">计算</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
